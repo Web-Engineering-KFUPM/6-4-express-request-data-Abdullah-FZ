@@ -1,4 +1,4 @@
-// TODO 3
+// TODO 4
 import express from "express";
 
 const app = express();
@@ -25,6 +25,20 @@ app.get("/profile/:first/:last", (req, res) => {
     ok: true,
     fullName: `${first} ${last}`
   });
+});
+
+app.param("userId", (req, res, next, userId) => {
+  const userIdNum = Number(userId);
+
+  if (!Number.isFinite(userIdNum) || userIdNum <= 0) {
+    return res.status(400).json({
+      ok: false,
+      error: "userId must be positive number"
+    });
+  }
+
+  req.userIdNum = userIdNum;
+  next();
 });
 
 app.listen(3000, () => {
