@@ -1,4 +1,4 @@
-// TODO 4 .
+// TODO 5
 import express from "express";
 
 const app = express();
@@ -39,6 +39,13 @@ app.param("userId", (req, res, next, userId) => {
 
   req.userIdNum = userIdNum;
   next();
+});
+
+app.get("/users/:userId", (req, res) => {
+  return res.json({
+    ok: true,
+    userId: req.userIdNum
+  });
 });
 
 app.listen(3000, () => {
