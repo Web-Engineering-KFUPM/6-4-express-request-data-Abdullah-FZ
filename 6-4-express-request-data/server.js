@@ -1,4 +1,4 @@
-// TODO 2 
+// TODO 3
 import express from "express";
 
 const app = express();
@@ -15,6 +15,15 @@ app.get("/echo", (req, res) => {
     name,
     age,
     msg: `Hello ${name}, you are ${age}`
+  });
+});
+
+app.get("/profile/:first/:last", (req, res) => {
+  const { first, last } = req.params;
+
+  return res.json({
+    ok: true,
+    fullName: `${first} ${last}`
   });
 });
 
